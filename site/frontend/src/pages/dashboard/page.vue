@@ -191,7 +191,9 @@ function getActiveClass(target: TargetUrl): string {
   const params = getUrlParams();
   const curTarget = params?.["target"];
   if (!curTarget) {
-    return target.name === x86_64UnknownLinuxGnu.name ? "target-active" : "";
+    return target.name === LoongArch64UnknownLinuxGnu.name
+      ? "target-active"
+      : "";
   }
   return target.name == curTarget ? "target-active" : "";
 }

@@ -13,7 +13,7 @@ pub async fn handle_dashboard(
 ) -> ServerResult<dashboard::Response> {
     let target = match query.target {
         Some(target) => Target::from_str(&target),
-        _ => Ok(Target::X86_64UnknownLinuxGnu),
+        _ => Ok(Target::LoongArch64UnknownLinuxGnu),
     }?;
 
     let index = ctxt.index.load();

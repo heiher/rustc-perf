@@ -249,7 +249,7 @@ async fn create_graphs(
         .unwrap_or_else(|| Ok(Selector::Subset(Profile::default_profiles())))?;
     let scenario_selector = create_selector(&request.scenario).unwrap_or(Ok(Selector::All))?;
     let target_selector = create_selector(&request.target)
-        .unwrap_or(Ok(Selector::One(Target::X86_64UnknownLinuxGnu)))?;
+        .unwrap_or(Ok(Selector::One(Target::LoongArch64UnknownLinuxGnu)))?;
 
     let interpolated_responses: Vec<_> = ctxt
         .statistic_series(
