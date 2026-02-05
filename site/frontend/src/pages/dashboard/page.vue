@@ -41,7 +41,16 @@ const AArch64UnknownLinuxGnu = {
   url: `${windowLocation}?target=aarch64-unknown-linux-gnu`,
 };
 
-const TargetUrls = [x86_64UnknownLinuxGnu, AArch64UnknownLinuxGnu];
+const LoongArch64UnknownLinuxGnu = {
+  name: "loongarch64-unknown-linux-gnu",
+  url: `${windowLocation}?target=loongarch64-unknown-linux-gnu`,
+};
+
+const TargetUrls = [
+  x86_64UnknownLinuxGnu,
+  AArch64UnknownLinuxGnu,
+  LoongArch64UnknownLinuxGnu,
+];
 
 const scale: Ref<ScaleKind> = ref("linear");
 const response: Ref<DashboardData | null> = ref(null);
