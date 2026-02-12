@@ -99,7 +99,10 @@ export function createDefaultCompileFilter(
 export type Profile = "check" | "clippy" | "debug" | "opt" | "doc" | "doc-json";
 export type CodegenBackend = "llvm" | "cranelift";
 export type Category = "primary" | "secondary";
-export type Target = "x86_64-unknown-linux-gnu" | "aarch64-unknown-linux-gnu";
+export type Target =
+  | "x86_64-unknown-linux-gnu"
+  | "aarch64-unknown-linux-gnu"
+  | "loongarch64-unknown-linux-gnu";
 
 export type CompileBenchmarkMap = Dict<CompileBenchmarkMetadata>;
 
