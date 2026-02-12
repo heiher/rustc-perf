@@ -11,7 +11,8 @@ export interface BenchmarkInfo {
   compile_targets: Target[];
 }
 
-export const DEFAULT_COMPILE_TARGET_TRIPLE: Target = "x86_64-unknown-linux-gnu";
+export const DEFAULT_COMPILE_TARGET_TRIPLE: Target =
+  "loongarch64-unknown-linux-gnu";
 
 function compareDefaultCompileTarget(a: string, b: string) {
   return (
