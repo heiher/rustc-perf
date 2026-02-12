@@ -165,6 +165,7 @@ export function isSameStringArray(a: string[], b: string[]): boolean {
 const TARGET_SHORTCUTS: {[target in Target]: string} = {
   "x86_64-unknown-linux-gnu": "x64",
   "aarch64-unknown-linux-gnu": "AArch64",
+  "loongarch64-unknown-linux-gnu": "loong64",
 };
 
 export function formatTarget(target: Target): string {
