@@ -14,7 +14,7 @@ use database::interpolate::IsInterpolated;
 use database::selector::{
     CompileBenchmarkQuery, CompileTestCase, RuntimeBenchmarkQuery, Selector, SeriesResponse,
 };
-use database::{self, ArtifactId, CodegenBackend, Profile, Scenario, Target};
+use database::{self, intern_target_name, ArtifactId, CodegenBackend, Profile, Scenario, Target};
 
 /// Returns data for before/after graphs when comparing a single test result comparison
 /// for a compile-time benchmark.
@@ -249,8 +249,9 @@ async fn create_graphs(
     let profile_selector = create_selector(&request.profile)
         .unwrap_or_else(|| Ok(Selector::Subset(Profile::default_profiles())))?;
     let scenario_selector = create_selector(&request.scenario).unwrap_or(Ok(Selector::All))?;
-    let target_selector = create_selector(&request.target)
-        .unwrap_or(Ok(Selector::One(Target::X86_64UnknownLinuxGnu)))?;
+    let target_selector = create_selector(&request.target).unwrap_or(Ok(Selector::One(
+        Target::Custom(intern_target_name("loongarch64-unknown-linux-gnu")),
+    )))?;
     let backend_selector =
         create_selector(&request.backend).unwrap_or(Ok(Selector::One(CodegenBackend::Llvm)))?;
 
