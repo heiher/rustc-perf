@@ -5,7 +5,7 @@ use crate::api::{ServerResult, dashboard};
 use crate::benchmark_metadata::get_stable_benchmark_names;
 use crate::load::SiteCtxt;
 use database::{self, ArtifactId, Profile, Scenario, metric::Metric};
-use database::{Target, selector};
+use database::{Target, intern_target_name, selector};
 
 pub async fn handle_dashboard(
     query: dashboard::Request,
@@ -13,7 +13,9 @@ pub async fn handle_dashboard(
 ) -> ServerResult<dashboard::Response> {
     let target = match query.target {
         Some(target) => Target::from_str(&target),
-        _ => Ok(Target::X86_64UnknownLinuxGnu),
+        _ => Ok(Target::Custom(intern_target_name(
+            "loongarch64-unknown-linux-gnu",
+        ))),
     }?;
 
     let index = ctxt.index.load();
