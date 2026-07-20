@@ -391,7 +391,7 @@ static MIGRATIONS: &[Migration] = &[
     "#,
     ),
     Migration::new("alter table pull_request_build add column backends text"),
-    // Add target as a unique constraint, defaulting to 'x86_64-unknown-linux-gnu'
+    // Add target as a unique constraint, defaulting to 'loongarch64-unknown-linux-gnu'
     Migration::without_foreign_key_constraints(
         r#"
         create table pstat_series_with_target(
@@ -400,11 +400,11 @@ static MIGRATIONS: &[Migration] = &[
             profile text not null,
             scenario text not null,
             backend text not null,
-            target text not null default 'x86_64-unknown-linux-gnu',
+            target text not null default 'loongarch64-unknown-linux-gnu',
             metric text not null,
             UNIQUE(crate, profile, scenario, backend, target, metric)
         );
-        insert into pstat_series_with_target select id, crate, profile, scenario, backend, 'x86_64-unknown-linux-gnu', metric from pstat_series;
+        insert into pstat_series_with_target select id, crate, profile, scenario, backend, 'loongarch64-unknown-linux-gnu', metric from pstat_series;
         drop table pstat_series;
         alter table pstat_series_with_target rename to pstat_series;
     "#,
@@ -434,17 +434,17 @@ static MIGRATIONS: &[Migration] = &[
         CREATE INDEX error_artifact_idx ON error(aid);
         "#,
     ),
-    // Add runtime target as a unique constraint, defaulting to 'x86_64-unknown-linux-gnu'
+    // Add runtime target as a unique constraint, defaulting to 'loongarch64-unknown-linux-gnu'
     Migration::without_foreign_key_constraints(
         r#"
         CREATE TABLE runtime_pstat_series_with_target(
             id integer primary key not null,
             benchmark text not null,
-            target text not null default 'x86_64-unknown-linux-gnu',
+            target text not null default 'loongarch64-unknown-linux-gnu',
             metric text not null,
             UNIQUE(benchmark, target, metric)
         );
-        INSERT INTO runtime_pstat_series_with_target SELECT id, benchmark, 'x86_64-unknown-linux-gnu', metric FROM runtime_pstat_series;
+        INSERT INTO runtime_pstat_series_with_target SELECT id, benchmark, 'loongarch64-unknown-linux-gnu', metric FROM runtime_pstat_series;
         DROP TABLE runtime_pstat_series;
         ALTER TABLE runtime_pstat_series_with_target RENAME TO runtime_pstat_series;
     "#,
@@ -458,12 +458,12 @@ static MIGRATIONS: &[Migration] = &[
             profile          TEXT NOT NULL,
             scenario         TEXT NOT NULL,
             backend          TEXT NOT NULL,
-            target           TEXT NOT NULL DEFAULT 'x86_64-unknown-linux-gnu',
+            target           TEXT NOT NULL DEFAULT 'loongarch64-unknown-linux-gnu',
             frontend_threads INTEGER NOT NULL DEFAULT 1,
             metric           TEXT NOT NULL,
             UNIQUE(crate, profile, scenario, backend, target, frontend_threads, metric)
         );
-        INSERT INTO pstat_series_with_frontend_threads select id, crate, profile, scenario, backend, 'x86_64-unknown-linux-gnu', 1, metric FROM pstat_series;
+        INSERT INTO pstat_series_with_frontend_threads select id, crate, profile, scenario, backend, 'loongarch64-unknown-linux-gnu', 1, metric FROM pstat_series;
         DROP TABLE pstat_series;
         ALTER TABLE pstat_series_with_frontend_threads RENAME TO pstat_series;
     "#,
